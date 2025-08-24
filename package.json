@@ -1,0 +1,10 @@
+{
+  "name": "whitetrypecars",
+  "version": "0.1.0",
+  "private": true,
+  "main": "App.js",
+  "scripts": {
+    "start": "echo 'run expo start'",
+    "test": "echo 'No tests yet'"
+  }
+}
