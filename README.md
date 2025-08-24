@@ -43,6 +43,14 @@ Aplicación móvil basada en React Native/Expo para la potenciación de vehícul
    npm run submit:android
    ```
 
+## Política de privacidad y Data safety
+- Este repo incluye `docs/privacy.html`. Si publicas el repo en GitHub y activas **GitHub Pages** (Source: “Deploy from a branch”, rama `main`, carpeta `/docs`), tendrás una URL pública como:
+  ```
+  https://<tu-usuario>.github.io/<tu-repo>/privacy.html
+  ```
+- Usa esa URL en la ficha de Play (Policy > App content > Privacy policy).
+- En “Data safety”, puedes declarar “No se recopilan datos” si mantienes la app como está (sin envíos a servidores ni SDKs extra).
+
 ## Próximos pasos
 - Generación real de archivos mediante IA y control anti-fraude.
 - Integración de pagos y sistema de pedidos.

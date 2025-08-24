@@ -1,0 +1,14 @@
+{
+  "cli": { "version": ">= 7.7.0" },
+  "build": {
+    "production": {
+      "android": { "buildType": "app-bundle" }
+    },
+    "development": {
+      "developmentClient": true
+    }
+  },
+  "submit": {
+    "production": {}
+  }
+}
