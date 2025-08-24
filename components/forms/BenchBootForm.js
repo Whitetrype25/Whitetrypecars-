@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button } from 'react-native';
+import { View, Text, TextInput, Button, Alert } from 'react-native';
 
 export default function BenchBootForm({ method }) {
   const [form, setForm] = useState({ name: '', vehicle: '', notes: '' });
 
   const submit = () => {
     console.log('Bench/Boot request', { method, ...form });
-    alert('Solicitud enviada');
+    Alert.alert('Solicitud enviada', 'Nos pondremos en contacto contigo.');
   };
 
   return (

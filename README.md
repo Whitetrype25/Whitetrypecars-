@@ -12,21 +12,43 @@ Aplicación móvil basada en React Native/Expo para la potenciación de vehícul
   - Stage 3: advertencias en tres fases que deben aceptarse antes de continuar.
 - Precio total calculado según la selección del usuario.
 
-## Construcción
-1. Instalar dependencias (se requiere Node.js):
+## Desarrollo
+1. Instalar dependencias (Node.js LTS):
    ```
    npm install
    ```
-2. Ejecutar en modo desarrollo:
+2. Ejecutar en modo desarrollo (Expo):
    ```
-   npm start
+   npm run start
    ```
-3. Para generar un APK listo para Play Store con Expo:
+
+## Build para Play Store (AAB) con EAS
+> Requiere una cuenta gratuita en Expo y tener `eas-cli` (ya en devDependencies).
+
+1. Inicia sesión:
    ```
-   npx expo build:android
+   npx eas login
+   ```
+2. Configura EAS (crea `eas.json` si no existe):
+   ```
+   npx eas build:configure
+   ```
+3. Genera el **Android App Bundle (.aab)**:
+   ```
+   npm run build:android
+   ```
+   Cuando acabe, descarga el `.aab` desde el dashboard o desde la terminal.
+4. (Opcional) Envío directo a Play si ya tienes Play Console configurado:
+   ```
+   npm run submit:android
    ```
 
 ## Próximos pasos
 - Generación real de archivos mediante IA y control anti-fraude.
 - Integración de pagos y sistema de pedidos.
 - Mejoras gráficas y pruebas automatizadas.
+
+## Notas de publicación
+- Asegúrate de completar en Play Console: **Data safety**, **Content rating**, **política de privacidad** (URL), e indicar si hay **anuncios**.
+- Sube primero a una **pista interna** para probar (internal testing).
+- Sustituye los placeholders de icono/splash por imágenes PNG reales antes del build final.

@@ -4,18 +4,16 @@
     "slug": "whitetrypecars",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
+    // ⚠️ Usa icono y splash reales ANTES del build final. De momento se omiten para evitar fallos.
+    // "icon": "./assets/icon.png",
+    // "splash": { "image": "./assets/splash.png", "resizeMode": "contain", "backgroundColor": "#ffffff" },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": ["**/*"],
     "android": {
-      "package": "com.whitetrypecars.app"
+      "package": "com.whitetrypecars.app",
+      "permissions": []
     }
   }
 }

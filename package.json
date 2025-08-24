@@ -4,12 +4,18 @@
   "private": true,
   "main": "App.js",
   "scripts": {
-    "start": "echo 'run expo start'",
-    "test": "echo 'No tests yet'"
+    "start": "expo start",
+    "android": "expo run:android",
+    "lint": "echo \"no lint configured\"",
+    "build:android": "eas build -p android --profile production",
+    "submit:android": "eas submit -p android"
   },
   "dependencies": {
     "expo": "^50.0.0",
     "react": "18.2.0",
     "react-native": "0.73.0"
+  },
+  "devDependencies": {
+    "eas-cli": "^7.7.0"
   }
 }
