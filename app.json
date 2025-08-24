@@ -13,7 +13,12 @@
     "assetBundlePatterns": ["**/*"],
     "android": {
       "package": "com.whitetrypecars.app",
-      "permissions": []
+      "permissions": [],
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon-foreground.png",
+        "backgroundColor": "#000000"
+      }
     }
   }
 }

@@ -5,44 +5,49 @@ import Stage3Warnings from './components/Stage3Warnings';
 import BenchBootForm from './components/forms/BenchBootForm';
 import { detectMethod, programs } from './services/ecuDetection';
 import { baseStage1, baseStage2, baseStage3 } from './services/pricing';
+import { useStore } from './store/app';
+import { t } from './i18n';
 
 export default function App() {
-  const [ecuRef, setEcuRef] = useState('');
-  const [stage, setStage] = useState(null);
-  const [method, setMethod] = useState('');
-  const [total, setTotal] = useState(0);
-  const [stage3Accepted, setStage3Accepted] = useState(false);
+  const [ecuRef, setEcuRef] = useState<string>('');
+  const [method, setMethod] = useState<string>('');
+  const total = useStore((s) => s.total);
+  const setStage = useStore((s) => s.setStage);
+  const stage = useStore((s) => s.stage);
+  const setTotal = useStore((s) => s.setTotal);
+  const stage3Accepted = useStore((s) => s.stage3Accepted);
+  const setStage3Accepted = useStore((s) => s.setStage3Accepted);
 
   const handleDetect = () => {
     const m = detectMethod(ecuRef);
     setMethod(m);
     if (m !== 'OBD') {
-      Alert.alert('Aviso', `Esta ECU requiere ${m}. Se mostrará el procedimiento adecuado.`);
+      Alert.alert(t('notice'), t('method_required', { method: m }));
     }
   };
 
   const handleSubmit = () => {
     if (stage === 3 && !stage3Accepted) {
-      Alert.alert('Aviso', 'Debes aceptar las advertencias en todas las fases.');
+      Alert.alert(t('notice'), t('accept_all_phases'));
       return;
     }
     Alert.alert(
-      'Solicitud enviada',
-      `ECU: ${ecuRef}\nStage: ${stage}\nMétodo: ${method}\nPrecio estimado: €${total}`
+      t('request_sent'),
+      `ECU: ${ecuRef}\n${t('stage')}: ${stage}\n${t('method')}: ${method}\n${t('price')}: €${total}`,
     );
   };
 
   const renderStageExtras = () => {
     if (stage === 2) {
-      return <Stage2Config onTotalChange={setTotal} />;
+      return <Stage2Config onTotalChange={(v: number) => setTotal(v)} />;
     }
     if (stage === 3) {
-      return <Stage3Warnings onAcceptChange={setStage3Accepted} />;
+      return <Stage3Warnings onAcceptChange={(v: boolean) => setStage3Accepted(v)} />;
     }
     return null;
   };
 
-  const handleStageSelect = (s) => {
+  const handleStageSelect = (s: 1 | 2 | 3) => {
     setStage(s);
     if (s === 1) setTotal(baseStage1);
     if (s === 2) setTotal(baseStage2);
@@ -52,28 +57,30 @@ export default function App() {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <ScrollView contentContainerStyle={{ padding: 16 }}>
-        <Text style={{ fontSize: 24, fontWeight: 'bold', marginBottom: 10 }}>
-          White Trype Cars
-        </Text>
-        <Text>Introduce referencia de ECU o selecciona archivo original:</Text>
+        <Text style={{ fontSize: 24, fontWeight: 'bold', marginBottom: 10 }}>White Trype Cars</Text>
+        <Text>{t('intro')}</Text>
         <TextInput
           style={{ borderWidth: 1, marginVertical: 10, padding: 8 }}
-          placeholder="Referencia de ECU"
+          placeholder={t('ecu_placeholder')}
           value={ecuRef}
           onChangeText={setEcuRef}
         />
-        <Button title="Detectar método" onPress={handleDetect} />
+        <Button title={t('detect_method')} onPress={handleDetect} />
         {method ? (
           <View style={{ marginTop: 10 }}>
-            <Text>Método: {method}</Text>
-            <Text>Programas compatibles: {programs[method].join(', ')}</Text>
+            <Text>
+              {t('method')}: {method}
+            </Text>
+            <Text>
+              {t('compatible_programs')}: {programs[method as keyof typeof programs].join(', ')}
+            </Text>
           </View>
         ) : null}
 
         {method && method !== 'OBD' && <BenchBootForm method={method} />}
 
         <View style={{ marginVertical: 20 }}>
-          <Text>Selecciona Stage:</Text>
+          <Text>{t('select_stage')}:</Text>
           <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: 10 }}>
             <Button title="Stage 1" onPress={() => handleStageSelect(1)} />
             <Button title="Stage 2" onPress={() => handleStageSelect(2)} />
@@ -83,12 +90,17 @@ export default function App() {
 
         {renderStageExtras()}
 
-        {stage && <Text>Precio: €{total}</Text>}
+        {stage && (
+          <Text>
+            {t('price')}: €{total}
+          </Text>
+        )}
 
-        <Button title="Enviar solicitud" onPress={handleSubmit} />
+        <Button title={t('send_request')} onPress={handleSubmit} />
 
-        <Text style={{ marginTop: 20 }}>
-          Si no estás seguro de cómo proceder, puedes enviarnos tu ECU para realizar el servicio en nuestras instalaciones.
+        <Text style={{ marginTop: 20 }}>{t('help_text')}</Text>
+        <Text style={{ marginTop: 10, fontSize: 12, color: '#666' }}>
+          {t('legal_disclaimer')}
         </Text>
       </ScrollView>
     </SafeAreaView>
