@@ -1,0 +1,24 @@
+{
+  "expo": {
+    "name": "WhiteTrypeCars",
+    "slug": "whitetrypecars",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    // ⚠️ Usa icono y splash reales ANTES del build final. De momento se omiten para evitar fallos.
+    // "icon": "./assets/icon.png",
+    // "splash": { "image": "./assets/splash.png", "resizeMode": "contain", "backgroundColor": "#ffffff" },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": ["**/*"],
+    "android": {
+      "package": "com.whitetrypecars.app",
+      "permissions": [],
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon-foreground.png",
+        "backgroundColor": "#000000"
+      }
+    }
+  }
+}
